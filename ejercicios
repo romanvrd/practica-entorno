@@ -1,0 +1,146 @@
+6.35) Sirve para mostrar el estado de un archivo o sistema de archivos.
+
+6.36) Da error ya que «carpeta» es un archivo y no un directorio.
+
+6.37) Tres. «./» es el directorio de trabajo actual, «../» es el directorio padre y «......» es un archivo.
+
+6.38) No daría error en caso de que exista una carpeta llamada «cd» en el directorio de trabajo actual.
+
+6.40) El error se produce porque el directorio no está vacío. Podría solucionarse vaciando el directorio con «rm carpeta/archivo» y luego «rmdir carpeta» o usando «rm -r carpeta».
+
+6.41) El error se produce porque «carpeta» es un archivo y no un directorio. Para borrarlo debería usarse «rm carpeta».
+
+6.42) El error se produce porque no existe el directorio «carpeta1». Para solucionarse debe crearse el directorio «carpeta1» con «mkdir carpeta1» y luego crear «carpeta2» dentro de «carpeta1» con «mkdir carpeta1/carpeta2».
+
+6.43) El comando completo podría ser «rm -i archivo». Podría omitirse la comprobación omitiendo la opción «-i».
+
+6.44)
+touch argentina francia
+mkdir semi1 semi2
+ln argentina semi1
+ln francia semi2
+touch semi1/croacia semi2/marruecos
+
+6.45)
+cp -r ./ «ruta de destino»
+
+6.46)
+rm -r semi1 semi2
+
+6.50) Se pueden buscar con la opción «-mtime n», donde «n» representa los días. En este caso, el comando sería «find «directorio» -mtime 7».
+
+6.51)
+find ./ -type d -empty -exec cp -r {} {}-copy \;
+
+6.52)
+ls -l /usr/bin/??
+find /usr/bin/?? -type f
+
+6.53)
+touch {1..31}-{1,3,5,7,8,10,12}-2023 {1..30}-{4,6,9,11}-2023 {1..29}-2-2023
+
+6.54) El error se produce ya que «rm -rf carpeta/*» no elimina los archivos ocultos, por lo que el directorio no queda vacío. Para solucionarlo, podría eliminarse el directorio usando «rm -r carpeta».
+
+6.55)
+ls -a .*
+
+6.80) Para poder ver el contenido más fácilmente puede usarse el comando «less»
+
+6.81) Para mostrar todas las líneas excepto las «n» últimas se agrega un «-» adelante del argumento de la opción «-n». En este caso, el comando sería «head -n -3».
+
+6.85)
+cut -d , -f 2 «archivo»
+
+6.87.1)
+(x|y)x
+
+6.87.2)
+(xx)*
+
+6.87.3)
+x(xx)*
+
+6.87.4)
+x*y*
+
+6.87.5)
+xy*
+
+6.87.6)
+(xx)*y(xx)*
+
+6.87.7) Palabras que terminen en .jpg o .jpeg.
+[[:alnum:]]*(.jpg|jpeg)
+
+6.88) La opción «-A» imprime las «n» líneas posteriores a las líneas coincidentes. La opción «-B» hace lo mismo pero con las «n» líneas anteriores.
+
+6.97) «echo 2 * 3 >10» imprime «2», seguido por los nombres de los archivos presentes en el directorio actual, seguido por «3», y luego guarda esta salida en un nuevo archivo llamado «10».
+
+6.98) «cat < archivo1 > archivo2» redirige la entrada estándar de «archivo1» al comando «cat» y redirecciona la salida estándar a «archivo2», sobreescribiendo su contenido en caso de tenerlo.
+
+6.99)
+echo > «archivo»
+
+6.100)
+echo {a..z}{a..z}{a..z}{a..z} | wc -c
+
+6.101)
+ls -R / > «archivo»
+find / > «archivo»
+
+6.102)
+head -n 3 «archivo» | tail -n 1
+
+6.103)
+find «directorio» -type f -exec wc -l {} \; | sort -nr | cut -d " " -f 2 | head -n 1
+
+6.104)
+ls -l /dev/pts/* | wc -l
+find /dev/pts/* | wc -l
+
+6.105)
+ls -a | du -h --max-depth=1 | cut -f 1
+
+6.106)
+history | tr -s " " | cut -d " " -f 3 | grep cd | wc -l
+
+6.107)
+grep -aR GNU /usr/share/doc | cut -d : -f 1 | sort | uniq | wc -l
+
+6.121) No es posible identificarse como el usuario «visitante» ya que no tiene una contraseña establecida. Para solucionar el problema, se debe usar «sudo passwd visitante» y establecer una contraseña.
+
+6.122)
+sudo usermod -s /bin/bash visitante
+
+6.123)
+sudo -u visitante find / -type d -writable
+
+6.124)
+sudo mkdir /home/visitante
+sudo usermod -d /home/visitante visitante
+sudo chown visitante:visitante /home/visitante
+sudo chmod 700 /home/visitante
+
+6.125)
+(-|d|l|c|b)((-|r)(-|w)(-|x)){3}
+
+6.129)
+ps -ax | grep "sleep 1d" | head -n 1 | tr -s " " | cut -d " " -f 2
+
+6.130)
+kill -s TSTP «PID»
+
+6.131)
+kill -s CONT «PID»
+kill -s INT «PID»
+
+6.132)
+firefox &
+disown «PID»
+
+6.134) No se encuentran los ejecutables de dichos comandos ya que son comandos propios de bash, por lo que no existen sus binarios.
+
+6.143) La diferencia entre las salidas es que el programa «sleep.py» corre durante 10 segundos aproximadamente, por lo que el valor de salida de «user» es de 10 segundos aprox., mientras que el comando sleep sólo pausa la ejecución de comandos durante el tiempo estipulado, por lo que su valor de salida de «user» es 0 (mientras que la salida de «real» es 10 aprox.).
+
+6.144)
+watch -n «tiempo» «comando»

